@@ -35,6 +35,9 @@ package
 			
 			heart = new Heart();
 			add(heart);
+			
+			//test tree
+			add(new Tree(0, 300));
 		}
 		
 		override public function begin():void 

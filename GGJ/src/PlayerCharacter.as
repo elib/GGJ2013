@@ -4,7 +4,7 @@ package
 	import net.flashpunk.*;
 	import net.flashpunk.graphics.Spritemap;
 	
-	public class PlayerCharacter extends Entity
+	public class PlayerCharacter extends PhysicsEntity
 	{
 		[Embed(source = "res/Character.png")]
 		private static const PlayerGraphic:Class;

@@ -1,5 +1,6 @@
 package  
 {
+	import flash.geom.Point;
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
 	
@@ -11,6 +12,8 @@ package
 	{
 		
 		private var map :Map;
+		
+		public static var GRAVITY :Number = 100;
 		
 		public function GameWorld() 
 		{

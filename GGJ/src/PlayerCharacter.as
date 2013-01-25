@@ -55,7 +55,7 @@ package
 		override protected function isColliding():Boolean 
 		{
 			var distFromCenter :Number = FP.distance(0, 0, position.x, position.y);
-			return (distFromCenter < 20 || distFromCenter > 200);
+			return (distFromCenter < 20 || distFromCenter > 640);
 		}
 		
 	}

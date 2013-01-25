@@ -2,6 +2,7 @@ package
 {
 	import flash.geom.Point;
 	import net.flashpunk.FP;
+	import net.flashpunk.utils.Draw;
 	import net.flashpunk.World;
 	
 	/**
@@ -21,8 +22,11 @@ package
 			super();
 			
 			//initializaition
-			map = new Map();
-			add(map);
+			for (var i :int = 0; i < 6; i++)
+			{
+				map = new Map(360 / 6 * i);
+				add(map);
+			}
 			
 			player = new PlayerCharacter();
 			add(player);
@@ -40,6 +44,13 @@ package
 			super.update();
 			FP.camera.x = FP.lerp(FP.camera.x, player.centerX - FP.halfWidth, 0.02);
 			FP.camera.y = FP.lerp(FP.camera.y, player.centerY - FP.halfHeight, 0.02);
+		}
+		
+		override public function render():void 
+		{
+			super.render();
+			Draw.circle(0, 0, 5);
+			Draw.circle(0, 0, 640);
 		}
 		
 	}

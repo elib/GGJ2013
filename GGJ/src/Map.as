@@ -1,7 +1,11 @@
 package  
 {
+	import flash.display.BitmapData;
+	import flash.geom.Matrix;
+	import flash.geom.Point;
 	import flash.utils.ByteArray;
 	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Tilemap;
 	import net.flashpunk.masks.Grid;
 	
@@ -23,12 +27,24 @@ package
 		
 		private static const SOLID_TILES :Array = [1, 2, 3, 4, 5, 6];
 		
-		public function Map() 
+		private var bitmap :BitmapData;
+		
+		private var angle :Number;
+		
+		public function Map(angle :Number) 
 		{
 			super();
 			loadMap();
 			type = Types.TYPE_MAP;
 			mask = grid = tilemap.createGrid(SOLID_TILES);
+			bitmap = new BitmapData(tilemap.width, tilemap.height);
+			
+			var radius :Number = tilemap.width / ( 2 * Math.sin(Math.PI / 6));
+			
+			angle = angle / 180 * Math.PI + Math.PI / 2;
+			x = Math.sin(angle) * radius;
+			y = -Math.cos(angle) * radius;
+			this.angle = angle - Math.PI / 2 - Math.PI * 2 / 6 * 2;
 		}
 		
 		private function loadMap():void 
@@ -45,6 +61,21 @@ package
 					}
 				}
 			}
+		}
+		
+		private var _point :Point = new Point();
+		private var _matrix :Matrix = new Matrix();
+		
+		override public function render():void 
+		{
+			bitmap.fillRect(bitmap.rect, 0);
+			tilemap.render(bitmap, _point, _point);
+			
+			_matrix.identity();
+			_matrix.rotate(angle);
+			_matrix.translate( -FP.camera.x + x, -FP.camera.y + y);
+			
+			FP.buffer.draw(bitmap, _matrix);
 		}
 		
 	}

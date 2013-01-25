@@ -10,10 +10,14 @@ package
 	public class GameWorld extends World 
 	{
 		
+		private var map :Map;
+		
 		public function GameWorld() 
 		{
 			super();
 			//initializaition
+			map = new Map();
+			add(map);
 		}
 		
 		override public function begin():void 

@@ -12,6 +12,7 @@ package
 		public function PlayerCharacter() 
 		{
 			graphic = new Spritemap(PlayerGraphic, 32, 64);
+			type = Types.TYPE_PLAYER;
 		}
 		
 	}

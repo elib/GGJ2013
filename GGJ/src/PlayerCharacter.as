@@ -48,8 +48,16 @@ package
 			if (Input.check(Key.DOWN)) acceleration.y += ACCELERATION_SPEED;
 			if (Input.check(Key.UP)) acceleration.y -= ACCELERATION_SPEED;
 			
-			if (acceleration.x > 0) (graphic as Spritemap).flipped = false;
-			if (acceleration.x < 0) (graphic as Spritemap).flipped = true;
+			if(velocity.length > 0) {
+				//z element of cross product to determine direction
+				// a x r
+				var cross:Number = acceleration.x * position.y - position.x * acceleration.y;
+				if (cross > 0) {
+					(graphic as Spritemap).flipped = false;
+				} else {
+					(graphic as Spritemap).flipped = true;
+				}
+			}
 		}
 		
 		override protected function isColliding():Boolean 

@@ -19,19 +19,25 @@ package
 		{
 			graphic = new Spritemap(PlayerGraphic, 10, 12);
 			type = Types.TYPE_PLAYER;
+			(graphic as Spritemap).centerOrigin();
 			setHitboxTo(graphic);
+			originX = (graphic as Spritemap).width / 2;
+			originY = (graphic as Spritemap).height / 2;
 			acceleration.y = 0;
 			maxSpeed.x = MAX_SPEED;
 			maxSpeed.y = MAX_SPEED;
 			drag.x = DRAG;
 			drag.y = DRAG;
+			position.y = 100;
 		}
 		
 		override public function update():void 
 		{
-			input();
-			physics();		
 			super.update();
+			input();
+			physics();
+			
+			(graphic as Spritemap).angle = FP.angle(0, 0, position.x, position.y) + 90;
 		}
 		
 		private function input():void 
@@ -41,6 +47,15 @@ package
 			if (Input.check(Key.LEFT)) acceleration.x -= ACCELERATION_SPEED;
 			if (Input.check(Key.DOWN)) acceleration.y += ACCELERATION_SPEED;
 			if (Input.check(Key.UP)) acceleration.y -= ACCELERATION_SPEED;
+			
+			if (acceleration.x > 0) (graphic as Spritemap).flipped = false;
+			if (acceleration.x < 0) (graphic as Spritemap).flipped = true;
+		}
+		
+		override protected function isColliding():Boolean 
+		{
+			var distFromCenter :Number = FP.distance(0, 0, position.x, position.y);
+			return (distFromCenter < 20 || distFromCenter > 200);
 		}
 		
 	}

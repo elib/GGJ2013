@@ -51,10 +51,10 @@ package
 			velocity.x = FP.clamp(velocity.x, -maxSpeed.x, maxSpeed.x);
 			
 			position.x += velocity.x * FP.elapsed;
-			if (collide(Types.TYPE_MAP, position.x, position.y))
+			if (isColliding())
 			{
 				direction = FP.sign(velocity.x);
-				while (collide(Types.TYPE_MAP, position.x, position.y))
+				while (isColliding())
 					position.x -= 0.1 * direction;
 				if (velocity.x < 0)
 					collidingSides |= LEFT;
@@ -75,10 +75,10 @@ package
 			velocity.y = FP.clamp(velocity.y, -maxSpeed.y, maxSpeed.y);
 			
 			position.y += velocity.y * FP.elapsed;
-			if (collide(Types.TYPE_MAP, position.x, position.y))
+			if (isColliding())
 			{
 				direction = FP.sign(velocity.y);
-				while (collide(Types.TYPE_MAP, position.x, position.y))
+				while (isColliding())
 					position.y -= 0.1 * direction;
 				if (velocity.y > 0)
 					collidingSides |= DOWN;
@@ -94,6 +94,11 @@ package
 		public function isCollidingOnSides(sides :uint) :Boolean
 		{
 			return ((collidingSides & sides) != 0);
+		}
+		
+		protected function isColliding() :Boolean
+		{
+			return (collide(Types.TYPE_MAP, position.x, position.y) != null);
 		}
 		
 		

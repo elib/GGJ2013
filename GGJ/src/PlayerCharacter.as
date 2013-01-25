@@ -11,9 +11,9 @@ package
 		[Embed(source = "res/Character.png")]
 		private static const PlayerGraphic:Class;
 		
-		private static const ACCELERATION_SPEED :Number = 40;
-		private static const MAX_SPEED :Number = 50;
-		private static const DRAG :Number = 20;
+		private static const ACCELERATION_SPEED :Number = 80;
+		private static const MAX_SPEED :Number = 90;
+		private static const DRAG :Number = 40;
 		
 		public function PlayerCharacter() 
 		{

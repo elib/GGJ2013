@@ -36,6 +36,9 @@ package
 			var xml :XML = new XML(bytes.readUTFBytes(bytes.length));
 			graphic = tilemap = new Tilemap(TilesetGraphic, (int)(xml.@width) * (int)(xml.@tilewidth), (int)(xml.@height) * (int)(xml.@tileheight), xml.@tilewidth, xml.@tileheight);
 			tilemap.loadFromString(xml.layer.data);
+			for (var xx :int = 0; xx < tilemap.columns; xx++)
+				for (var yy :int = 0; yy < tilemap.rows; yy++)
+					tilemap.setTile(xx, yy, tilemap.getTile(xx, yy) - 1);
 		}
 		
 	}

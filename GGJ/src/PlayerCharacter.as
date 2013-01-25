@@ -11,7 +11,7 @@ package
 		
 		public function PlayerCharacter() 
 		{
-			graphic = new Spritemap(PlayerGraphic, 32, 64);
+			graphic = new Spritemap(PlayerGraphic, 10, 12);
 		}
 		
 	}

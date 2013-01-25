@@ -11,13 +11,18 @@ package
 	{
 		
 		private var map :Map;
+		private var player:PlayerCharacter;
 		
 		public function GameWorld() 
 		{
 			super();
+			
 			//initializaition
 			map = new Map();
 			add(map);
+			
+			player = new PlayerCharacter();
+			add(player);
 		}
 		
 		override public function begin():void 

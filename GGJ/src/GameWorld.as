@@ -17,6 +17,8 @@ package
 		
 		public static var GRAVITY :Number = 100;
 		
+		private var heart :Heart;
+		
 		public function GameWorld() 
 		{
 			super();
@@ -30,6 +32,9 @@ package
 			
 			player = new PlayerCharacter();
 			add(player);
+			
+			heart = new Heart();
+			add(heart);
 		}
 		
 		override public function begin():void 

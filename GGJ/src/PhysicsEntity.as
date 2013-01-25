@@ -1,7 +1,6 @@
 package  
 {
 	import flash.geom.Point;
-	import heroes.Tank;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
@@ -51,17 +50,13 @@ package
 			
 			velocity.x = FP.clamp(velocity.x, -maxSpeed.x, maxSpeed.x);
 			
-			position.x += velocity.x * GameWorld.GAME_SCALE * FP.elapsed;
-			if (collide("Map", position.x, position.y) || position.x < 0 || position.x + width > (FP.world as GameWorld).theMap.width)
+			position.x += velocity.x * FP.elapsed;
+			if (collide("Map", position.x, position.y))
 			{
 				direction = FP.sign(velocity.x);
 				while (collide("Map", position.x, position.y))
 					position.x -= 0.1 * direction;
-				if (position.x < 0)
-					position.x = 0;
-				if (position.x + width > (FP.world as GameWorld).theMap.width)
-					position.x = (FP.world as GameWorld).theMap.width - width;
-				if (position.x <= 0 || velocity.x < 0)
+				if (velocity.x < 0)
 					collidingSides |= LEFT;
 				else
 					collidingSides |= RIGHT;
@@ -79,7 +74,7 @@ package
 			
 			velocity.y = FP.clamp(velocity.y, -maxSpeed.y, maxSpeed.y);
 			
-			position.y += velocity.y * GameWorld.GAME_SCALE * FP.elapsed;
+			position.y += velocity.y * FP.elapsed;
 			if (collide("Map", position.x, position.y))
 			{
 				direction = FP.sign(velocity.y);

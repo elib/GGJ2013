@@ -15,6 +15,12 @@ package
 			type = Types.TYPE_PLAYER;
 		}
 		
+		override public function update():void 
+		{
+			physics();
+			super.update();
+		}
+		
 	}
 
 }

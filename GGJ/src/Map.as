@@ -1,5 +1,6 @@
 package  
 {
+	import flash.utils.ByteArray;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Tilemap;
 	import net.flashpunk.masks.Grid;
@@ -14,26 +15,27 @@ package
 		private var tilemap :Tilemap;
 		private var grid :Grid
 		
-		private static const TILE_SIZE :int = 32;
-		
 		[Embed(source="res/TileSet.png")]
 		private static const TilesetGraphic :Class;
 		
-		private static const SOLID_TILES :Array = [0, 1];
+		[Embed(source = "res/mockup_level_1.tmx", mimeType = "application/octet-stream")]
+		private static const LEVEL_1 :Class;
+		
+		private static const SOLID_TILES :Array = [1, 2];
 		
 		public function Map() 
 		{
 			super();
-			graphic = tilemap = new Tilemap(TilesetGraphic, TILE_SIZE * 20, TILE_SIZE * 20, TILE_SIZE, TILE_SIZE);
 			loadMap();
 			grid = tilemap.createGrid(SOLID_TILES);
 		}
 		
 		private function loadMap():void 
 		{
-			for (var xx :int = 0 ; xx < tilemap.columns; xx++)
-				for (var yy :int = 0 ; yy < tilemap.rows; yy++)
-					tilemap.setTile(xx, yy, yy > 7 ? 1 : 0);
+			var bytes :ByteArray = new LEVEL_1();
+			var xml :XML = new XML(bytes.readUTFBytes(bytes.length));
+			graphic = tilemap = new Tilemap(TilesetGraphic, (int)(xml.@width) * (int)(xml.@tilewidth), (int)(xml.@height) * (int)(xml.@tileheight), xml.@tilewidth, xml.@tileheight);
+			tilemap.loadFromString(xml.layer.data);
 		}
 		
 	}

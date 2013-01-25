@@ -51,10 +51,10 @@ package
 			velocity.x = FP.clamp(velocity.x, -maxSpeed.x, maxSpeed.x);
 			
 			position.x += velocity.x * FP.elapsed;
-			if (collide("Map", position.x, position.y))
+			if (collide(Types.TYPE_MAP, position.x, position.y))
 			{
 				direction = FP.sign(velocity.x);
-				while (collide("Map", position.x, position.y))
+				while (collide(Types.TYPE_MAP, position.x, position.y))
 					position.x -= 0.1 * direction;
 				if (velocity.x < 0)
 					collidingSides |= LEFT;
@@ -75,10 +75,10 @@ package
 			velocity.y = FP.clamp(velocity.y, -maxSpeed.y, maxSpeed.y);
 			
 			position.y += velocity.y * FP.elapsed;
-			if (collide("Map", position.x, position.y))
+			if (collide(Types.TYPE_MAP, position.x, position.y))
 			{
 				direction = FP.sign(velocity.y);
-				while (collide("Map", position.x, position.y))
+				while (collide(Types.TYPE_MAP, position.x, position.y))
 					position.y -= 0.1 * direction;
 				if (velocity.y > 0)
 					collidingSides |= DOWN;

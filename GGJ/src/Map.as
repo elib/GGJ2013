@@ -27,7 +27,8 @@ package
 		{
 			super();
 			loadMap();
-			grid = tilemap.createGrid(SOLID_TILES);
+			type = Types.TYPE_MAP;
+			mask = grid = tilemap.createGrid(SOLID_TILES);
 		}
 		
 		private function loadMap():void 

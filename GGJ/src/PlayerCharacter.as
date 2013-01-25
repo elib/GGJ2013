@@ -13,6 +13,7 @@ package
 		{
 			graphic = new Spritemap(PlayerGraphic, 10, 12);
 			type = Types.TYPE_PLAYER;
+			setHitboxTo(graphic);
 		}
 		
 		override public function update():void 

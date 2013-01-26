@@ -104,6 +104,8 @@ package
 			super.update();
 			FP.camera.x = FP.lerp(FP.camera.x, player.centerX - FP.halfWidth, 0.02);
 			FP.camera.y = FP.lerp(FP.camera.y, player.centerY - FP.halfHeight, 0.02);
+			FP.screen.color = FP.getColorRGB((1 - getWorldHealth()) * 0x99, 0, getWorldHealth() * 0x99);
+			Music.setGoodMusicLevel(getWorldHealth());
 		}
 		
 		override public function render():void 
@@ -112,5 +114,15 @@ package
 			Draw.circle(0, 0, 5);
 			Draw.circle(0, 0, 640);
 		}	
+		public function getWorldHealth() :Number
+		{
+			var arr :Vector.<ILiving> = new Vector.<ILiving>();
+			getClass(ILiving, arr);
+			var sum :Number = 0;
+			for (var i :int = 0; i < arr.length; i++)
+				sum += arr[i].getLife();
+			return sum / arr.length;
+		}
+		
 	}
 }

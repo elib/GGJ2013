@@ -46,7 +46,12 @@ package
 			
 			layer = Layers.LAYER_ANIMAL;
 			
-			graphic = spritemap = new Spritemap(animalGraphics, frameWidth, frameHeight, animationEnded);
+			graphic = spritemap = new Spritemap(animalGraphics, frameWidth, frameHeight, animationEnded)
+		}
+		
+		override public function added():void 
+		{
+			super.added();
 			spritemap.play(ANIM_IDLE);
 		}
 		
@@ -77,7 +82,9 @@ package
 			
 			hungriness += FP.elapsed;
 			if (spritemap.currentAnim == ANIM_IDLE || spritemap.currentAnim == ANIM_WALK)
-				spritemap.play(velocity.x != 0 ? ANIM_WALK : ANIM_IDLE);
+				spritemap.play(velocity.x == 0 ? ANIM_IDLE : ANIM_WALK);
+			if (velocity.x > 0) spritemap.flipped = false;
+			if (velocity.x < 0) spritemap.flipped = true;
 			health -= hungriness * FP.elapsed;
 			if (hungriness >= HUNGRY_ANIMAL)
 				tryBitingAnimal();

@@ -173,20 +173,19 @@ package
 			}
 			
 			if (closestAnimal != null) {
-				if (closestDist < 10) {
+				if (closestDist < 40) {
 					biteAnimal(closestAnimal);
 				}
 			}
-			//biteAnimal();
 		}
 		
 		private function biteAnimal(animal :Animal) :void
 		{
-			animal.bited(hungriness);
+			animal.bited(hungriness * 3);
 			hungriness = 0;
 		}
 		
-		private function bited(amount :Number):void 
+		public function bited(amount :Number):void 
 		{
 			health -= amount;
 			if(health <= 0)

@@ -130,5 +130,10 @@ package
 			return FP.clamp(sum / arr.length, 0, 1);
 		}
 		
+		public function getPlayerDistanceFromHeart() :Number
+		{
+			return FP.distance(0, 0, player.x, player.y);
+		}
+		
 	}
 }

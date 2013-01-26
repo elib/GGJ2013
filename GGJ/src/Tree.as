@@ -21,8 +21,8 @@ package
 			var arr :Array = new Array();
 			spritemap.add("growing", growFrames, growFrames.length / GROW_TIME, false);
 			spritemap.play("growing");
-			this.x = x;
-			this.y = y;
+			spritemap.x = -frameWidth / 2;
+			spritemap.y = -frameHeight;
 		}
 		
 	}

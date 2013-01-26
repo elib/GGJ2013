@@ -81,7 +81,9 @@ package
 			
 			hungriness += FP.elapsed;
 			if (spritemap.currentAnim == ANIM_IDLE || spritemap.currentAnim == ANIM_WALK)
-				spritemap.play((velocity.x == 0 && velocity.y) ? ANIM_IDLE : ANIM_WALK);
+				spritemap.play(velocity.x == 0 ? ANIM_IDLE : ANIM_WALK);
+			if (velocity.x > 0) spritemap.flipped = false;
+			if (velocity.x < 0) spritemap.flipped = true;
 			health -= hungriness * FP.elapsed;
 			if (hungriness >= HUNGRY_ANIMAL)
 				tryBitingAnimal();

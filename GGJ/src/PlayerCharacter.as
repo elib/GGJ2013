@@ -107,6 +107,14 @@ package
 			var distFromCenter :Number = FP.distance(0, 0, position.x, position.y);
 			return (distFromCenter < 20 || distFromCenter > 700);
 		}		
+		
+		public function getBelongingTilemap() :int
+		{
+			// TODO : FIXIXIXIIXIXIX
+			var out :int = Math.floor((worldAngle - 90) / (360 / 6)) - 4;
+			if (out < 0) out = 4 + out;
+			return out;
+		}
 	}
 
 }

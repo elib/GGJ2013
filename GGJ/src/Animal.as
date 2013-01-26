@@ -4,6 +4,7 @@ package
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Anim;
 	import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.tweens.misc.Alarm;
 	/**
 	 * ...
@@ -32,6 +33,11 @@ package
 		protected static const ANIM_DIE :String = "ANIM_DIE";
 		
 		private var movementAlarm:Alarm;
+		
+		[Embed(source="res/audio/chew.mp3")]
+		private static const BiteSound :Class;
+		
+		private var BiteSFX :Sfx = new Sfx(BiteSound);
 		
 		public function Animal(animalGraphics :Class, frameWidth :int, frameHeight :int) 
 		{
@@ -183,11 +189,19 @@ package
 		{
 			animal.bited(hungriness * 3);
 			hungriness = 0;
+			playBiteSound();
+		}
+		
+		private function playBiteSound():void 
+		{
+			if(tilemapNum == (FP.world as GameWorld).player.getBelongingTilemap())
+					BiteSFX.play(FP.clamp((1 - ((FP.world as GameWorld).getPlayerDistanceFromHeart() / 500)),0,1));
 		}
 		
 		public function bited(amount :Number):void 
 		{
 			health -= amount;
+			spritemap.play(ANIM_HIT);
 			if(health <= 0)
 				die(false);
 		}
@@ -220,6 +234,7 @@ package
 		{
 			tree.bited(hungriness);
 			hungriness = 0;
+			playBiteSound();
 		}
 		
 		private function die(corpse :Boolean):void 

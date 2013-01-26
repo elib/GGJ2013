@@ -9,7 +9,7 @@ package
 	 * ...
 	 * @author Galman33
 	 */
-	public class Tree extends Entity 
+	public class Tree extends Entity implements ILiving
 	{
 		
 		private var spritemap :Spritemap;
@@ -17,6 +17,9 @@ package
 		private static const GROW_TIME :Number = 30;
 		
 		public var tilemapNum :int = 0;
+		
+		private static const MAX_HEALTH :Number = 100;
+		private var health :Number = MAX_HEALTH;
 		
 		public function Tree(treeGraphics :Class, frameWidth :int, frameHeight :int, growFrames :Array) 
 		{
@@ -46,5 +49,24 @@ package
 			spritemap.angle = 360 /  6 * tilemapNum;
 			*/
 		}	
+		public function bited(amount :Number):void 
+		{
+			health -= amount;
+			if (health <= 0)
+				die();
+		}
+		
+		/* INTERFACE ILiving */
+		
+		public function getLife():Number 
+		{
+			return health / MAX_HEALTH;
+		}
+		
+		private function die():void 
+		{
+			// TODO: Die
+		}
+		
 	}
 }

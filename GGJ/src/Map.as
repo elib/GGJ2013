@@ -28,7 +28,7 @@ package
 		
 		private var angle :Number;
 		
-		public function Map(angle :Number, level :Class) 
+		public function Map(angle :Number, level :Class, radiusFactor:Number) 
 		{
 			super();
 			loadMap(level);
@@ -36,7 +36,7 @@ package
 			mask = grid = tilemap.createGrid(SOLID_TILES);
 			bitmap = new BitmapData(tilemap.width, tilemap.height);
 			
-			var radius :Number = tilemap.width / ( 2 * Math.sin(Math.PI / 6));
+			var radius:Number = tilemap.width * radiusFactor;
 			
 			angle = angle / 180 * Math.PI + Math.PI / 2;
 			x = Math.sin(angle) * radius;

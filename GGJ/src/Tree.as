@@ -26,9 +26,9 @@ package
 			var arr :Array = new Array();
 			spritemap.add("growing", growFrames, growFrames.length / GROW_TIME, false);
 			spritemap.play("growing");
-			spritemap.x = -frameWidth / 2;
-			spritemap.y = -frameHeight;
-			spritemap.relative = false;
+			//spritemap.x = -frameWidth / 2;
+			//spritemap.y = -frameHeight;
+			//spritemap.relative = false;
 			setHitboxTo(spritemap);
 		}
 		
@@ -37,9 +37,11 @@ package
 		override public function update():void 
 		{
 			super.update();
+			/*
 			spritemap.x = Math.sin(Math.PI * 2 / 6 * tilemapNum) * FP.distance(0, 0, x + spritemap.width / 2, y + spritemap.height);
 			spritemap.y = Math.cos(Math.PI * 2 / 6 * tilemapNum) * FP.distance(0, 0, x + spritemap.width / 2, y + spritemap.height);
 			spritemap.angle = 360 /  6 * tilemapNum;
+			*/
 		}	
 	}
 }

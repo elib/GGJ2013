@@ -28,11 +28,15 @@ package
 		{
 			super();
 			
+			var numMaps:int = 6;
+			var radiusFactor :Number = 1 / ( 2 * Math.sin(Math.PI / numMaps));
+			
 			//initializaition
 			allMaps = new Array();
-			for (var i :int = 0; i < 6; i++)
+			
+			for (var i :int = 0; i < numMaps; i++)
 			{
-				map = new Map(360 / 6 * i, Levels.LEVELS[i]);
+				map = new Map(360 / numMaps * i, Levels.LEVELS[i], radiusFactor);
 				allMaps.push(map);
 				add(map);
 			}
@@ -44,14 +48,14 @@ package
 			add(heart);
 			
 			//test tree
-			for (var q :int = 0 ; q < 5; q++)
+			for (var q :int = 0 ; q < 50; q++)
 			{
 				var tree :Tree = (add(new (FP.choose([Tree1, Tree2, Tree3]) as Class)) as Tree);
-				tree.tilemapNum = 0;//FP.rand(6);
+				tree.tilemapNum = 0;//FP.rand(numMaps);
 				
 				var theMap:Map = allMaps[tree.tilemapNum] as Map;
 				
-				var x:int = FP.rand(20);
+				var x:int = FP.rand(theMap.grid.columns);
 				var col:int = x;
 				
 				var found:Boolean = false;
@@ -63,8 +67,8 @@ package
 				}
 				
 				trace("found at: " + x + ", " + hei);
-				tree.x = x * 32;
-				tree.y = hei * 32;
+				tree.x = x * 32 - theMap.grid.width/2 - tree.width/4;
+				tree.y = hei * 32 - tree.height -theMap.grid.height/4 + theMap.width*radiusFactor;
 			}
 		}
 		

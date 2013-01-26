@@ -24,13 +24,13 @@ package
 			image.x = (FP.width - image.width) / 2;
 			image.alpha = 0;
 			addGraphic(image);
-			FP.screen.color = 0xFFFFFF;
+			FP.screen.color = 0x00009F;
 		}
 		
 		override public function update():void 
 		{
 			super.update();
-			image.alpha += FP.elapsed * 0.2;
+			image.alpha += FP.elapsed * 0.5;
 			if (Input.mousePressed)
 				(FP.engine as Main).switchToGame();
 		}

@@ -3,6 +3,7 @@ package
 	import flash.geom.Point;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.tweens.misc.Alarm;
 	/**
 	 * ...
 	 * @author Galman33
@@ -11,6 +12,8 @@ package
 	{
 		private var health :Number = MAX_HEALTH;
 		private var hungriness :Number = 0;
+		
+		public var alive:Boolean = true;
 		
 		private static const MAX_HEALTH :Number = 100;
 		
@@ -27,9 +30,18 @@ package
 		protected static const ANIM_EAT :String = "ANIM_EAT";
 		protected static const ANIM_DIE :String = "ANIM_DIE";
 		
+		private var movementAlarm:Alarm;
+		
 		public function Animal(animalGraphics :Class, frameWidth :int, frameHeight :int) 
 		{
 			super();
+			
+			this.acceleration = FP.zero;
+			this.drag = FP.zero;
+			
+			movementAlarm = new Alarm(1);
+			
+			setBehaviorAlarm();
 			
 			layer = Layers.LAYER_ANIMAL;
 			
@@ -49,6 +61,15 @@ package
 		{
 			super.update();
 			
+			movementAlarm.update();
+			
+			if(alive) {
+				
+				doMovement();
+				
+				physics();
+			}
+			
 			setToTopOfTileMap();
 			
 			showRotatedImage();
@@ -65,19 +86,37 @@ package
 				die(true);
 		}
 		
+		private function setBehaviorAlarm():void {
+			movementAlarm.reset((FP.random * 5) + 1);
+			
+			this.velocity.x = 100 * (FP.random - 0.5);
+		}
+		
+		private function doMovement():void {
+			if (movementAlarm.percent >= 1) {
+				setBehaviorAlarm();
+			}
+			
+			var thisMap:Map = (FP.world as GameWorld).allMaps[tilemapNum];
+			var xpos:Number = this.x + thisMap.width / 2;
+			xpos = FP.clamp(xpos, 30, thisMap.width - 30);
+			this.x = xpos - thisMap.width / 2;
+		}
+		
 		private function setToTopOfTileMap():void {
 			//TODO: IT
 			
 			var radiusFactor:Number = (FP.world as GameWorld).radiusFactor;
 			var thisMap:Map = (FP.world as GameWorld).allMaps[tilemapNum];
 			
-			var x:Number = this.x + thisMap.grid.width / 2;
+			var x:Number = this.x - this.width / 2 + thisMap.grid.width / 2;
 			var col:Number = x / 32;
 			
 			var found:Boolean = false;
 			var hei:int = -1;
 			
-			while (!found) {
+			var maxHei:int = 20;
+			while (!found && hei < maxHei) {
 				hei++;
 				found = thisMap.grid.getTile(col, hei);
 			}
@@ -140,7 +179,7 @@ package
 			spritemap.play(ANIM_DIE);
 			if (corpse)
 			{
-				// TODO: add corpse
+				alive = false;
 			}
 		}
 		

@@ -34,8 +34,17 @@ package
 			
 			//spritemap.x = -frameWidth / 2;
 			//spritemap.y = -frameHeight;
-			//spritemap.relative = false;
+			
 			setHitboxTo(spritemap);
+		}
+		
+		public function RotateTo(theAngle:Number):void {
+			spritemap.relative = false;
+			this.spritemap.angle = theAngle;
+			spritemap.x = this.x;
+			spritemap.y = this.y;
+			FP.rotateAround(spritemap, new Point(0, 0), theAngle);
+			
 		}
 		
 		private var _center :Point = new Point(0, 0);
@@ -43,11 +52,6 @@ package
 		override public function update():void 
 		{
 			super.update();
-			/*
-			spritemap.x = Math.sin(Math.PI * 2 / 6 * tilemapNum) * FP.distance(0, 0, x + spritemap.width / 2, y + spritemap.height);
-			spritemap.y = Math.cos(Math.PI * 2 / 6 * tilemapNum) * FP.distance(0, 0, x + spritemap.width / 2, y + spritemap.height);
-			spritemap.angle = 360 /  6 * tilemapNum;
-			*/
 		}	
 		public function bited(amount :Number):void 
 		{

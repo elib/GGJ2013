@@ -12,9 +12,9 @@ package
 		[Embed(source = "res/Character.png")]
 		private static const PlayerGraphic:Class;
 		
-		private static const ACCELERATION_SPEED :Number = 80;
-		private static const MAX_SPEED :Number = 90;
-		private static const DRAG :Number = 40;
+		private static const ACCELERATION_SPEED :Number = 100;
+		private static const MAX_SPEED :Number = 120;
+		private static const DRAG :Number = 50;
 		
 		private var idleTime:Number = 0;
 		private var yOffset:Number = 0;

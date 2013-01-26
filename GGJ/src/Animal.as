@@ -2,6 +2,7 @@ package
 {
 	import flash.geom.Point;
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Anim;
 	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.tweens.misc.Alarm;
 	/**
@@ -146,7 +147,25 @@ package
 		
 		protected function tryBitingAnimal():void 
 		{
-			// TODO: Check if can bite other animals
+			var thisMap:Map = (FP.world as GameWorld).allMaps[tilemapNum];
+			var closestAnimal:Animal = null;
+			var closestDist:Number = 10000;
+			for (var i:int = 0; i < thisMap.animals.length; i++) {
+				var theAnimal:Animal = thisMap.animals[i];
+				if(theAnimal != this) {
+					var dist:Number = FP.distanceRects(theAnimal.x, theAnimal.y, theAnimal.width, theAnimal.height, this.x, this.y, this.width, this.height);
+					if (dist < closestDist) {
+						closestAnimal = theAnimal;
+					}
+				}
+			}
+			
+			if (closestAnimal != null) {
+				if (closestDist < 10) {
+					biteAnimal(closestAnimal);
+				}
+			}
+			//biteAnimal();
 		}
 		
 		private function biteAnimal(animal :Animal) :void

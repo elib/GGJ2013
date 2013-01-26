@@ -65,6 +65,7 @@ package
 				animal.tilemapNum = FP.rand(numMaps);
 				
 				theMap = allMaps[animal.tilemapNum] as Map;
+				theMap.animals.push(animal);
 				
 				x = FP.rand(theMap.grid.columns);
 				
@@ -79,6 +80,7 @@ package
 				tree.tilemapNum = FP.rand(numMaps);
 				
 				theMap = allMaps[tree.tilemapNum] as Map;
+				theMap.trees.push(tree);
 				
 				x = FP.rand(theMap.grid.columns);
 				col = x;

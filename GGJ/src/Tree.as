@@ -4,6 +4,8 @@ package
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.Sfx;
+	import net.flashpunk.World;
 	
 	/**
 	 * ...
@@ -17,15 +19,21 @@ package
 		private static const GROW_TIME :Number = 30;
 		
 		public var tilemapNum :int = 0;
+		public var canBeEaten:Boolean = false;
 		
 		private static const MAX_HEALTH :Number = 100;
 		private var health :Number = MAX_HEALTH;
+		
+		[Embed(source = "res/audio/tree-grow.mp3")]
+		private static const TreeGrowSound :Class;
+		
+		private var TreeGrowSFX :Sfx = new Sfx(TreeGrowSound);
 		
 		public function Tree(treeGraphics :Class, frameWidth :int, frameHeight :int, growFrames :Array) 
 		{
 			super();
 			
-			graphic = spritemap = new Spritemap(treeGraphics, frameWidth, frameHeight);
+			graphic = spritemap = new Spritemap(treeGraphics, frameWidth, frameHeight, animationEnded);
 			var arr :Array = new Array();
 			spritemap.add("growing", growFrames, growFrames.length / GROW_TIME * (FP.random * 0.5 - 0.25 + 1), false);
 			spritemap.play("growing");
@@ -36,6 +44,15 @@ package
 			//spritemap.y = -frameHeight;
 			
 			setHitboxTo(spritemap);
+		}
+		
+		private function animationEnded():void 
+		{
+			if (spritemap.currentAnim == "growing")
+			{
+				canBeEaten = true;
+				TreeGrowSFX.play(FP.clamp((FP.world as GameWorld).getPlayerDistanceFromHeart() / 200, 0, 1));
+			}
 		}
 		
 		public function RotateTo(theAngle:Number):void {

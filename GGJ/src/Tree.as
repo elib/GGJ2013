@@ -14,9 +14,12 @@ package
 		
 		private static const GROW_TIME :Number = 30;
 		
-		public function Tree(treeGraphics :Class, frameWidth :int, frameHeight :int, growFrames :Array) 
+		public var whichTileMap:int = 0;
+		
+		public function Tree(treeGraphics :Class, frameWidth :int, frameHeight :int, growFrames :Array)
 		{
 			super();
+			
 			graphic = spritemap = new Spritemap(treeGraphics, frameWidth, frameHeight);
 			var arr :Array = new Array();
 			spritemap.add("growing", growFrames, growFrames.length / GROW_TIME, false);

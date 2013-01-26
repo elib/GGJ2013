@@ -17,7 +17,7 @@ package
 	{
 		
 		private var tilemap :Tilemap;
-		private var grid :Grid
+		public var grid :Grid
 		
 		[Embed(source="res/TileSet.png")]
 		private static const TilesetGraphic :Class;

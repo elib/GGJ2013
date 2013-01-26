@@ -46,6 +46,22 @@ package
 		
 		private function setToTopOfTileMap():void {
 			//TODO: IT
+			
+			var radiusFactor:Number = (FP.world as GameWorld).radiusFactor;
+			var thisMap:Map = (FP.world as GameWorld).allMaps[tilemapNum];
+			
+			var x:Number = this.x + thisMap.grid.width / 2;
+			var col:Number = x / 32;
+			
+			var found:Boolean = false;
+			var hei:int = -1;
+			
+			while (!found) {
+				hei++;
+				found = thisMap.grid.getTile(col, hei);
+			}
+			
+			this.y = (hei - 1) * 32 + 10 - thisMap.grid.height / 4 + thisMap.width * radiusFactor;
 		}
 		
 		public function showRotatedImage():void {

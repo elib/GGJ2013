@@ -31,10 +31,10 @@ package
 		
 		private var angle :Number;
 		
-		public function Map(angle :Number) 
+		public function Map(angle :Number, level :Class) 
 		{
 			super();
-			loadMap();
+			loadMap(level);
 			type = Types.TYPE_MAP;
 			mask = grid = tilemap.createGrid(SOLID_TILES);
 			bitmap = new BitmapData(tilemap.width, tilemap.height);
@@ -47,9 +47,9 @@ package
 			this.angle = angle - Math.PI / 2 - Math.PI * 2 / 6 * 2;
 		}
 		
-		private function loadMap():void 
+		private function loadMap(level :Class):void 
 		{
-			var bytes :ByteArray = new LEVEL_1();
+			var bytes :ByteArray = new level;
 			var xml :XML = new XML(bytes.readUTFBytes(bytes.length));
 			graphic = tilemap = new Tilemap(TilesetGraphic, (int)(xml.@width) * (int)(xml.@tilewidth), (int)(xml.@height) * (int)(xml.@tileheight), xml.@tilewidth, xml.@tileheight);
 			tilemap.loadFromString(xml.layer.data, ",", ",\n");

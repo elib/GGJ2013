@@ -27,7 +27,7 @@ package
 			
 			graphic = spritemap = new Spritemap(treeGraphics, frameWidth, frameHeight);
 			var arr :Array = new Array();
-			spritemap.add("growing", growFrames, growFrames.length / GROW_TIME, false);
+			spritemap.add("growing", growFrames, growFrames.length / GROW_TIME * (FP.random * 0.5 - 0.25 + 1), false);
 			spritemap.play("growing");
 			
 			this.layer = Layers.LAYER_TREE;

@@ -47,9 +47,9 @@ package
 			for (var q :int = 0 ; q < 5; q++)
 			{
 				var tree :Tree = (add(new (FP.choose([Tree1, Tree2, Tree3]) as Class)) as Tree);
-				tree.whichTileMap = FP.rand(6);
+				tree.tilemapNum = FP.rand(6);
 				
-				var theMap:Map = allMaps[tree.whichTileMap] as Map;
+				var theMap:Map = allMaps[tree.tilemapNum] as Map;
 				
 				var x:int = FP.rand(20);
 				var col:int = x;
@@ -63,8 +63,8 @@ package
 				}
 				
 				trace("found at: " + x + ", " + hei);
-				tree.x = x * 32 + theMap.x;
-				tree.y = hei * 32 + theMap.y;
+				tree.x = x * 32;
+				tree.y = hei * 32;
 			}
 		}
 		

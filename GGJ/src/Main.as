@@ -22,9 +22,21 @@ package
 		{
 			super.init();
 			FP.console.enable();
-			FP.world = new GameWorld();
+			
+			switchToIntro();
+			
 			Music.init();
 			Music.resume();
+		}
+		
+		public function switchToIntro() :void
+		{
+			FP.world = new IntroWorld();
+		}
+		
+		public function switchToGame() :void
+		{
+			FP.world = new GameWorld();
 		}
 		
 	}

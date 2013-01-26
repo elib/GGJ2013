@@ -22,11 +22,6 @@ package animals
 			spritemap.add(ANIM_DIE, [18]);
 		}
 		
-		override protected function tryBitingTree():void 
-		{
-			// do nothing.
-		}
-		
 	}
 
 }

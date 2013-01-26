@@ -21,12 +21,6 @@ package animals
 			spritemap.add(ANIM_EAT, [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 10, false);
 			spritemap.add(ANIM_DIE, [12, 13, 14, 15, 16], 6, false);
 		}
-		
-		override protected function tryBitingAnimal():void 
-		{
-			// do nothing.
-		}
-		
 	}
 
 }

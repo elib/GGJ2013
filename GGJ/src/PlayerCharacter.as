@@ -16,6 +16,9 @@ package
 		private static const MAX_SPEED :Number = 90;
 		private static const DRAG :Number = 40;
 		
+		private var idleTime:Number = 0;
+		private var yOffset:Number = 0;
+		
 		public function PlayerCharacter() 
 		{
 			graphic = new Spritemap(PlayerGraphic, 10, 12);
@@ -77,14 +80,24 @@ package
 					(graphic as Spritemap).flipped = true;
 				}
 			}
+			
+			//Breakfast: It's Not Just For Idle Anymore
+			idleTime += FP.elapsed;
+			
+			var amount:Number = Math.sin(idleTime * 2 * Math.PI / 3) * 5;
+			var pt:Point = downDirection.clone();
+			pt.normalize(amount);
+			
+			
+			graphic.x = pt.x;
+			graphic.y = pt.y;
 		}
 		
 		override protected function isColliding():Boolean 
 		{
 			var distFromCenter :Number = FP.distance(0, 0, position.x, position.y);
 			return (distFromCenter < 20 || distFromCenter > 640);
-		}
-		
+		}		
 	}
 
 }

@@ -40,8 +40,6 @@ package
 			spritemap.x = Math.sin(Math.PI * 2 / 6 * tilemapNum) * FP.distance(0, 0, x + spritemap.width / 2, y + spritemap.height);
 			spritemap.y = Math.cos(Math.PI * 2 / 6 * tilemapNum) * FP.distance(0, 0, x + spritemap.width / 2, y + spritemap.height);
 			spritemap.angle = 360 /  6 * tilemapNum;
-		}
-		
+		}	
 	}
-
 }

@@ -12,6 +12,11 @@ package
 		[Embed(source = "res/Character.png")]
 		private static const PlayerGraphic:Class;
 		
+		[Embed(source="res/audio/flight-blow.mp3")]
+		private static const FlightSound :Class;
+		
+		private var FlightSFX :Sfx = new Sfx(FlightSound);
+		
 		private static const ACCELERATION_SPEED :Number = 100;
 		private static const MAX_SPEED :Number = 120;
 		private static const DRAG :Number = 50;
@@ -61,6 +66,10 @@ package
 		private function input():void 
 		{
 			acceleration.x = acceleration.y = 0;
+			
+			if (Input.pressed(Key.RIGHT) || Input.pressed(Key.D) || Input.pressed(Key.LEFT) || Input.pressed(Key.A)
+				|| Input.pressed(Key.DOWN) || Input.pressed(Key.S) || Input.pressed(Key.UP) || Input.pressed(Key.W))
+				FlightSFX.play(1);
 			
 			if (Input.check(Key.RIGHT) || Input.check(Key.D)) acceleration.x += 1;
 			if (Input.check(Key.LEFT) || Input.check(Key.A) ) acceleration.x -= 1;

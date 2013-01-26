@@ -9,16 +9,19 @@ package animals
 	{
 		
 		[Embed(source = "../res/herbivore.png")]
-		private static const PlayerGraphic:Class;
+		private static const HerbivoreImg:Class;
 		
 		public function Herbivore() 
 		{
 			super();
 			
-			graphic = new Spritemap(PlayerGraphic, 10, 12);
+			graphic = new Spritemap(HerbivoreImg, 20, 20);
 		}
 		
-		
+		override protected function tryBitingAnimal():void 
+		{
+			// do nothing.
+		}
 		
 	}
 

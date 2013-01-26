@@ -44,7 +44,7 @@ package
 			return health / MAX_HEALTH;
 		}
 		
-		private function tryBitingAnimal():void 
+		protected function tryBitingAnimal():void 
 		{
 			// TODO: Check if can bite other animals
 		}
@@ -62,7 +62,7 @@ package
 				die(false);
 		}
 		
-		private function tryBitingTree():void 
+		protected function tryBitingTree():void 
 		{
 			// TODO: Check if can bite a tree
 		}

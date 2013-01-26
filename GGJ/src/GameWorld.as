@@ -30,6 +30,7 @@ package
 			
 			var numMaps:int = 6;
 			var radiusFactor :Number = 1 / ( 2 * Math.sin(Math.PI / numMaps));
+			var eachAngle:Number = 360 / Number(numMaps);
 			
 			//initializaition
 			allMaps = new Array();
@@ -68,7 +69,9 @@ package
 				
 				trace("found at: " + x + ", " + hei);
 				tree.x = x * 32 - theMap.grid.width/2 - tree.width/4;
-				tree.y = hei * 32 - tree.height -theMap.grid.height/4 + theMap.width*radiusFactor;
+				tree.y = hei * 32 - tree.height -theMap.grid.height / 4 + theMap.width * radiusFactor;
+				
+				tree.RotateTo(eachAngle * tree.tilemapNum);
 			}
 		}
 		

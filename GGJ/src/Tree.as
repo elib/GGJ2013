@@ -23,6 +23,7 @@ package
 			spritemap.play("growing");
 			spritemap.x = -frameWidth / 2;
 			spritemap.y = -frameHeight;
+			setHitboxTo(spritemap);
 		}
 		
 	}

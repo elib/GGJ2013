@@ -22,7 +22,6 @@ package
 		{
 			super.init();
 			FP.world = new GameWorld();
-			FP.console.enable();
 		}
 		
 	}

@@ -96,6 +96,10 @@ package
 				
 				tree.RotateTo(eachAngle * tree.tilemapNum);
 			}
+			
+			// Add clouds
+			for (var c :int = FP.rand(10) + 5; c > 0; c--)
+				add(new Cloud());
 		}
 		
 		override public function begin():void 

@@ -137,6 +137,7 @@ package
 		private function die(corpse :Boolean):void 
 		{
 			// TODO: die
+			spritemap.play(ANIM_DIE);
 			if (corpse)
 			{
 				// TODO: add corpse

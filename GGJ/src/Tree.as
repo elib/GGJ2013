@@ -51,7 +51,8 @@ package
 			if (spritemap.currentAnim == "growing")
 			{
 				canBeEaten = true;
-				TreeGrowSFX.play(FP.clamp((FP.world as GameWorld).getPlayerDistanceFromHeart() / 200, 0, 1));
+				if(tilemapNum == (FP.world as GameWorld).player.getBelongingTilemap())
+					TreeGrowSFX.play(FP.clamp((1 - ((FP.world as GameWorld).getPlayerDistanceFromHeart() / 500)),0,1));
 			}
 		}
 		

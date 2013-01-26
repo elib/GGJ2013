@@ -26,7 +26,7 @@ package
 			(graphic as Spritemap).centerOO();
 			
 			cloudAngle = FP.random * 360;
-			cloudRadius = FP.random * 250 + 100;
+			cloudRadius = FP.random * 300 + 50;
 			cloudSpeed = FP.random * 20 + 5;
 		}
 		

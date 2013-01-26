@@ -18,7 +18,7 @@ package
 	{
 		
 		private var map :Map;
-		private var player:PlayerCharacter;
+		public var player:PlayerCharacter;
 		
 		public static var GRAVITY :Number = 100;
 		
@@ -100,7 +100,7 @@ package
 			}
 			
 			// Add clouds
-			for (var c :int = FP.rand(10) + 5; c > 0; c--)
+			for (var c :int = FP.rand(15) + 10; c > 0; c--)
 				add(new Cloud());
 		}
 		

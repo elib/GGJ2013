@@ -1,6 +1,8 @@
 package  
 {
+	import flash.geom.Point;
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Spritemap;
 	/**
 	 * ...
 	 * @author Galman33
@@ -27,6 +29,11 @@ package
 		override public function update():void 
 		{
 			super.update();
+			
+			setToTopOfTileMap();
+			
+			showRotatedImage();
+			
 			hungriness += FP.elapsed;
 			health -= hungriness * FP.elapsed;
 			if (hungriness >= HUNGRY_ANIMAL)
@@ -35,6 +42,23 @@ package
 				tryBitingTree();
 			if (health <= 0)
 				die(true);
+		}
+		
+		private function setToTopOfTileMap():void {
+			//TODO: IT
+		}
+		
+		public function showRotatedImage():void {
+			
+			var theAngle:Number = tilemapNum * 360 / (FP.world as GameWorld).allMaps.length;
+			var spritemap:Spritemap = graphic as Spritemap;
+			
+			spritemap.relative = false;
+			spritemap.angle = theAngle;
+			
+			spritemap.x = this.x;
+			spritemap.y = this.y;
+			FP.rotateAround(spritemap, new Point(0, 0), theAngle);
 		}
 		
 		/* INTERFACE ILiving */

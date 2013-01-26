@@ -24,7 +24,7 @@ package
 		
 		private var heart :Heart;
 		
-		private var allMaps:Array;
+		public var allMaps:Array;
 		
 		public function GameWorld() 
 		{

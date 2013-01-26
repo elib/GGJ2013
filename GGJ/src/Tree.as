@@ -44,7 +44,6 @@ package
 			spritemap.x = this.x;
 			spritemap.y = this.y;
 			FP.rotateAround(spritemap, new Point(0, 0), theAngle);
-			
 		}
 		
 		private var _center :Point = new Point(0, 0);

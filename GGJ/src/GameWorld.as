@@ -39,11 +39,12 @@ package
 			add(heart);
 			
 			//test tree
-			for (var i :int = 0 ; i < 5; i++)
+			for (var i :int = 0 ; i < 20; i++)
 			{
 				var tree :Tree = (add(new (FP.choose([Tree1, Tree2, Tree3]) as Class)) as Tree);
 				tree.x = FP.rand(200) - 100;
-				tree.y = FP.rand(200) - 100;
+				tree.y = 400;
+				tree.tilemapNum = FP.rand(6);
 			}
 		}
 		

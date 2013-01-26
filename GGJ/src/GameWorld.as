@@ -51,7 +51,7 @@ package
 			for (var q :int = 0 ; q < 50; q++)
 			{
 				var tree :Tree = (add(new (FP.choose([Tree1, Tree2, Tree3]) as Class)) as Tree);
-				tree.tilemapNum = 0;//FP.rand(numMaps);
+				tree.tilemapNum = FP.rand(numMaps);
 				
 				var theMap:Map = allMaps[tree.tilemapNum] as Map;
 				

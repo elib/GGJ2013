@@ -49,6 +49,7 @@ package
 			var bytes :ByteArray = new level;
 			var xml :XML = new XML(bytes.readUTFBytes(bytes.length));
 			graphic = tilemap = new Tilemap(TilesetGraphic, (int)(xml.@width) * (int)(xml.@tilewidth), (int)(xml.@height) * (int)(xml.@tileheight), xml.@tilewidth, xml.@tileheight);
+			this.layer = Layers.LAYER_MAP;
 			tilemap.loadFromString(xml.layer.data, ",", ",\n");
 			for (var xx :int = 0; xx < tilemap.columns; xx++) {
 				for (var yy :int = 0; yy < tilemap.rows; yy++) {

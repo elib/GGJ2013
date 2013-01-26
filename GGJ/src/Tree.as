@@ -26,6 +26,9 @@ package
 			var arr :Array = new Array();
 			spritemap.add("growing", growFrames, growFrames.length / GROW_TIME, false);
 			spritemap.play("growing");
+			
+			this.layer = Layers.LAYER_TREE;
+			
 			//spritemap.x = -frameWidth / 2;
 			//spritemap.y = -frameHeight;
 			//spritemap.relative = false;

@@ -2,6 +2,7 @@ package
 {
 	import animals.Carnivore;
 	import animals.Herbivore;
+	import animals.SpiderGoat;
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -61,7 +62,7 @@ package
 			
 			//add animals
 			for (var p:int = 0; p < 50; p++) {
-				var animal :Animal= (add(new (FP.choose([Herbivore, Carnivore]) as Class)) as Animal);
+				var animal :Animal= (add(new (FP.choose([Herbivore, Carnivore, SpiderGoat]) as Class)) as Animal);
 				animal.tilemapNum = FP.rand(numMaps);
 				
 				theMap = allMaps[animal.tilemapNum] as Map;

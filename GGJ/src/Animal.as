@@ -194,7 +194,26 @@ package
 		
 		protected function tryBitingTree():void 
 		{
-			// TODO: Check if can bite a tree
+			var thisMap:Map = (FP.world as GameWorld).allMaps[tilemapNum];
+			
+			var closestTree:Tree = null;
+			var closestDist:Number = 10000;
+			for (var i:int = 0; i < thisMap.trees.length; i++) {
+				var theTree:Tree = thisMap.trees[i];
+				if(theTree.alive && theTree.canBeEaten) {
+					var dist:Number = FP.distanceRects(theTree.x, theTree.y, theTree.width, theTree.height, this.x, this.y, this.width, this.height);
+					if (dist < closestDist) {
+						closestTree = theTree;
+						closestDist = dist;
+					}
+				}
+			}
+			
+			if (closestTree != null) {
+				if (closestDist < 40) {
+					biteTree(closestTree);
+				}
+			}
 		}
 		
 		private function biteTree(tree :Tree) :void 

@@ -18,6 +18,8 @@ package
 		
 		private static const GROW_TIME :Number = 30;
 		
+		public var alive:Boolean = true;
+		
 		public var tilemapNum :int = 0;
 		public var canBeEaten:Boolean = false;
 		
@@ -87,6 +89,14 @@ package
 		private function die():void 
 		{
 			// TODO: Die
+			alive = false;
+		}
+		
+		override public function render():void 
+		{
+			if(alive) {
+				super.render();
+			}
 		}
 		
 	}

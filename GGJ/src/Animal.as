@@ -13,6 +13,8 @@ package
 		private var health :Number = MAX_HEALTH;
 		private var hungriness :Number = 0;
 		
+		public var alive:Boolean = true;
+		
 		private static const MAX_HEALTH :Number = 100;
 		
 		private static const HUNGRY_TREE :Number = 10;
@@ -61,9 +63,12 @@ package
 			
 			movementAlarm.update();
 			
-			doMovement();
-			
-			physics();
+			if(alive) {
+				
+				doMovement();
+				
+				physics();
+			}
 			
 			setToTopOfTileMap();
 			
@@ -174,7 +179,7 @@ package
 			spritemap.play(ANIM_DIE);
 			if (corpse)
 			{
-				// TODO: add corpse
+				alive = false;
 			}
 		}
 		

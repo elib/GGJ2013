@@ -2,6 +2,7 @@ package
 {
 	import flash.geom.Point;
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Anim;
 	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.tweens.misc.Alarm;
 	/**
@@ -17,8 +18,8 @@ package
 		
 		private static const MAX_HEALTH :Number = 100;
 		
-		private static const HUNGRY_TREE :Number = 10;
-		private static const HUNGRY_ANIMAL :Number = 25;
+		private static const HUNGRY_TREE :Number = 5;
+		private static const HUNGRY_ANIMAL :Number = 10;
 		
 		public var tilemapNum:int = 0;
 		
@@ -84,7 +85,11 @@ package
 				spritemap.play(velocity.x == 0 ? ANIM_IDLE : ANIM_WALK);
 			if (velocity.x > 0) spritemap.flipped = false;
 			if (velocity.x < 0) spritemap.flipped = true;
-			health -= hungriness * FP.elapsed;
+			
+			if (hungriness > HUNGRY_ANIMAL * 2) {
+				health -= FP.elapsed;
+			}
+			//health -= hungriness * FP.elapsed;
 			if (hungriness >= HUNGRY_ANIMAL)
 				tryBitingAnimal();
 			if (hungriness >= HUNGRY_TREE)
@@ -153,16 +158,34 @@ package
 		
 		protected function tryBitingAnimal():void 
 		{
-			// TODO: Check if can bite other animals
+			var thisMap:Map = (FP.world as GameWorld).allMaps[tilemapNum];
+			var closestAnimal:Animal = null;
+			var closestDist:Number = 10000;
+			for (var i:int = 0; i < thisMap.animals.length; i++) {
+				var theAnimal:Animal = thisMap.animals[i];
+				if(theAnimal != this && theAnimal.alive) {
+					var dist:Number = FP.distanceRects(theAnimal.x, theAnimal.y, theAnimal.width, theAnimal.height, this.x, this.y, this.width, this.height);
+					if (dist < closestDist) {
+						closestAnimal = theAnimal;
+						closestDist = dist;
+					}
+				}
+			}
+			
+			if (closestAnimal != null) {
+				if (closestDist < 40) {
+					biteAnimal(closestAnimal);
+				}
+			}
 		}
 		
 		private function biteAnimal(animal :Animal) :void
 		{
-			animal.bited(hungriness);
+			animal.bited(hungriness * 3);
 			hungriness = 0;
 		}
 		
-		private function bited(amount :Number):void 
+		public function bited(amount :Number):void 
 		{
 			health -= amount;
 			if(health <= 0)

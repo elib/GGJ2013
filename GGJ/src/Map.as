@@ -28,9 +28,16 @@ package
 		
 		private var angle :Number;
 		
+		public var animals:Array;
+		public var trees:Array;
+		
 		public function Map(angle :Number, level :Class, radiusFactor:Number) 
 		{
 			super();
+			
+			animals = new Array();
+			trees = new Array();
+			
 			loadMap(level);
 			type = Types.TYPE_MAP;
 			mask = grid = tilemap.createGrid(SOLID_TILES);

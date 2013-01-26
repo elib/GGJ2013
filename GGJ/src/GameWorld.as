@@ -24,7 +24,7 @@ package
 			super();
 			
 			//initializaition
-			for (var i :int = 0; i < 6; i++)
+			for (var i :int = 0; i < 2; i++)
 			{
 				map = new Map(360 / 6 * i, Levels.LEVELS[i]);
 				add(map);

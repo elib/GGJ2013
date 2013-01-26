@@ -22,9 +22,6 @@ package
 		[Embed(source="res/TileSet.png")]
 		private static const TilesetGraphic :Class;
 		
-		[Embed(source = "res/mockup_level_1.tmx", mimeType = "application/octet-stream")]
-		private static const LEVEL_1 :Class;
-		
 		private static const SOLID_TILES :Array = [1, 2, 3, 4, 5, 6];
 		
 		private var bitmap :BitmapData;

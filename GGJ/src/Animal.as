@@ -7,7 +7,6 @@ package
 	 */
 	public class Animal extends PhysicsEntity implements ILiving
 	{
-		
 		private var health :Number = MAX_HEALTH;
 		private var hungriness :Number = 0;
 		
@@ -16,20 +15,24 @@ package
 		private static const HUNGRY_TREE :Number = 10;
 		private static const HUNGRY_ANIMAL :Number = 25;
 		
+		public var tilemapNum:int = 0;
+		
 		public function Animal() 
 		{
 			super();
+			
+			layer = Layers.LAYER_ANIMAL;
 		}
 		
 		override public function update():void 
-		{			
+		{
 			super.update();
 			hungriness += FP.elapsed;
 			health -= hungriness * FP.elapsed;
-			if (hungriness >= HUNGRY_TREE)
-				tryBitingTree();
 			if (hungriness >= HUNGRY_ANIMAL)
 				tryBitingAnimal();
+			if (hungriness >= HUNGRY_TREE)
+				tryBitingTree();
 			if (health <= 0)
 				die(true);
 		}
@@ -46,9 +49,9 @@ package
 			// TODO: Check if can bite other animals
 		}
 		
-		private function biteAnimal(animal :Animal)
+		private function biteAnimal(animal :Animal) :void
 		{
-			animal.bited();
+			animal.bited(hungriness);
 			hungriness = 0;
 		}
 		
@@ -64,7 +67,7 @@ package
 			// TODO: Check if can bite a tree
 		}
 		
-		private function biteTree(tree :Tree)
+		private function biteTree(tree :Tree) :void 
 		{
 			tree.bited(hungriness);
 			hungriness = 0;

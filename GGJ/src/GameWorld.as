@@ -1,5 +1,6 @@
 package  
 {
+	import animals.Herbivore;
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -48,16 +49,32 @@ package
 			heart = new Heart();
 			add(heart);
 			
-			//test tree
+			var theMap:Map;
+			var col:int, x:int;
+			
+			//add animals
+			for (var p:int = 0; p < 50; p++) {
+				var animal :Animal= (add(new (FP.choose([Herbivore]) as Class)) as Animal);
+				animal.tilemapNum = FP.rand(numMaps);
+				
+				theMap = allMaps[animal.tilemapNum] as Map;
+				
+				x = FP.rand(theMap.grid.columns);
+				
+				animal.x = x * 32 - theMap.grid.width / 2;
+				animal.y = -animal.height - theMap.grid.height / 4 + theMap.width * radiusFactor;
+			}
+			
+			//add trees
 			for (var q :int = 0 ; q < 50; q++)
 			{
 				var tree :Tree = (add(new (FP.choose([Tree1, Tree2, Tree3]) as Class)) as Tree);
 				tree.tilemapNum = FP.rand(numMaps);
 				
-				var theMap:Map = allMaps[tree.tilemapNum] as Map;
+				theMap = allMaps[tree.tilemapNum] as Map;
 				
-				var x:int = FP.rand(theMap.grid.columns);
-				var col:int = x;
+				x = FP.rand(theMap.grid.columns);
+				col = x;
 				
 				var found:Boolean = false;
 				var hei:int = -1;
@@ -67,7 +84,6 @@ package
 					found = theMap.grid.getTile(col, hei);
 				}
 				
-				trace("found at: " + x + ", " + hei);
 				tree.x = x * 32 - theMap.grid.width/2 - tree.width/4;
 				tree.y = hei * 32 - tree.height -theMap.grid.height / 4 + theMap.width * radiusFactor;
 				
@@ -94,8 +110,6 @@ package
 			super.render();
 			Draw.circle(0, 0, 5);
 			Draw.circle(0, 0, 640);
-		}
-		
+		}	
 	}
-
 }

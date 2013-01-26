@@ -113,13 +113,7 @@ package
 			FP.screen.color = FP.getColorRGB((1 - getWorldHealth()) * 0x99, 0, getWorldHealth() * 0x99);
 			Music.setGoodMusicLevel(getWorldHealth());
 		}
-		
-		override public function render():void 
-		{
-			super.render();
-			Draw.circle(0, 0, 5);
-			Draw.circle(0, 0, 640);
-		}	
+			
 		public function getWorldHealth() :Number
 		{
 			var arr :Vector.<ILiving> = new Vector.<ILiving>();

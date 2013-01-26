@@ -1,6 +1,7 @@
 package  
 {
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Spritemap;
 	/**
 	 * ...
 	 * @author Galman33
@@ -17,17 +18,38 @@ package
 		
 		public var tilemapNum:int = 0;
 		
-		public function Animal() 
+		protected var spritemap :Spritemap;
+		
+		protected static const ANIM_IDLE :String = "ANIM_IDLE";
+		protected static const ANIM_WALK :String = "ANIM_WALK";
+		protected static const ANIM_HIT :String = "ANIM_HIT";
+		protected static const ANIM_EAT :String = "ANIM_EAT";
+		protected static const ANIM_DIE :String = "ANIM_DIE";
+		
+		public function Animal(animalGraphics :Class, frameWidth :int, frameHeight :int) 
 		{
 			super();
 			
 			layer = Layers.LAYER_ANIMAL;
+			
+			graphic = spritemap = new Spritemap(animalGraphics, frameWidth, frameHeight, animationEnded);
+			spritemap.play(ANIM_IDLE);
+		}
+		
+		private function animationEnded():void 
+		{
+			if (spritemap.currentAnim != ANIM_IDLE && spritemap.currentAnim != ANIM_WALK && spritemap.currentAnim != ANIM_DIE)
+			{
+				spritemap.play(ANIM_IDLE);
+			}
 		}
 		
 		override public function update():void 
 		{
 			super.update();
 			hungriness += FP.elapsed;
+			if (spritemap.currentAnim == ANIM_IDLE || spritemap.currentAnim == ANIM_WALK)
+				spritemap.play(velocity.x != 0 ? ANIM_WALK : ANIM_IDLE);
 			health -= hungriness * FP.elapsed;
 			if (hungriness >= HUNGRY_ANIMAL)
 				tryBitingAnimal();

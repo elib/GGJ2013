@@ -1,9 +1,11 @@
 package  
 {
 	import flash.geom.Point;
+	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Draw;
 	import net.flashpunk.World;
+	import trees.*;
 	
 	/**
 	 * ...
@@ -37,7 +39,12 @@ package
 			add(heart);
 			
 			//test tree
-			add(new Tree(0, 300));
+			for (var i :int = 0 ; i < 5; i++)
+			{
+				var tree :Tree = (add(new (FP.choose([Tree1, Tree2, Tree3]) as Class)) as Tree);
+				tree.x = FP.rand(200) - 100;
+				tree.y = FP.rand(200) - 100;
+			}
 		}
 		
 		override public function begin():void 

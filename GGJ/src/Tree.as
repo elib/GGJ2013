@@ -10,18 +10,16 @@ package
 	public class Tree extends Entity 
 	{
 		
-		[Embed(source = "res/Tree.png")]
-		private static const TreeGraphics :Class;
-		
 		private var spritemap :Spritemap;
 		
 		private static const GROW_TIME :Number = 30;
 		
-		public function Tree(x :Number, y :Number) 
+		public function Tree(treeGraphics :Class, frameWidth :int, frameHeight :int, growFrames :Array) 
 		{
 			super();
-			graphic = spritemap = new Spritemap(TreeGraphics, 64, 128);
-			spritemap.add("growing", [0, 1, 2, 3, 4, 5, 6], 7 / GROW_TIME, false);
+			graphic = spritemap = new Spritemap(treeGraphics, frameWidth, frameHeight);
+			var arr :Array = new Array();
+			spritemap.add("growing", growFrames, growFrames.length / GROW_TIME, false);
 			spritemap.play("growing");
 			this.x = x;
 			this.y = y;

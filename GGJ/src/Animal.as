@@ -1,5 +1,6 @@
 package  
 {
+	import flash.geom.Point;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Spritemap;
 	/**
@@ -47,6 +48,11 @@ package
 		override public function update():void 
 		{
 			super.update();
+			
+			setToTopOfTileMap();
+			
+			showRotatedImage();
+			
 			hungriness += FP.elapsed;
 			if (spritemap.currentAnim == ANIM_IDLE || spritemap.currentAnim == ANIM_WALK)
 				spritemap.play(velocity.x != 0 ? ANIM_WALK : ANIM_IDLE);
@@ -57,6 +63,39 @@ package
 				tryBitingTree();
 			if (health <= 0)
 				die(true);
+		}
+		
+		private function setToTopOfTileMap():void {
+			//TODO: IT
+			
+			var radiusFactor:Number = (FP.world as GameWorld).radiusFactor;
+			var thisMap:Map = (FP.world as GameWorld).allMaps[tilemapNum];
+			
+			var x:Number = this.x + thisMap.grid.width / 2;
+			var col:Number = x / 32;
+			
+			var found:Boolean = false;
+			var hei:int = -1;
+			
+			while (!found) {
+				hei++;
+				found = thisMap.grid.getTile(col, hei);
+			}
+			
+			this.y = (hei - 1) * 32 + 10 - thisMap.grid.height / 4 + thisMap.width * radiusFactor;
+		}
+		
+		public function showRotatedImage():void {
+			
+			var theAngle:Number = tilemapNum * 360 / (FP.world as GameWorld).allMaps.length;
+			var spritemap:Spritemap = graphic as Spritemap;
+			
+			spritemap.relative = false;
+			spritemap.angle = theAngle;
+			
+			spritemap.x = this.x;
+			spritemap.y = this.y;
+			FP.rotateAround(spritemap, new Point(0, 0), theAngle);
 		}
 		
 		/* INTERFACE ILiving */

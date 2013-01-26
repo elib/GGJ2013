@@ -24,14 +24,20 @@ package
 		
 		private var heart :Heart;
 		
-		private var allMaps:Array;
+		
+		private var numMaps:int = 6;
+		public var allMaps:Array;
+		
+		public function get radiusFactor() :Number {
+			return 1 / ( 2 * Math.sin(Math.PI / numMaps));
+		}
 		
 		public function GameWorld() 
 		{
 			super();
 			
-			var numMaps:int = 6;
-			var radiusFactor :Number = 1 / ( 2 * Math.sin(Math.PI / numMaps));
+			
+			
 			var eachAngle:Number = 360 / Number(numMaps);
 			
 			//initializaition

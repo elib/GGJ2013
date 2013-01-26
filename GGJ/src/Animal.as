@@ -73,6 +73,10 @@ package
 		private function die(corpse :Boolean):void 
 		{
 			// TODO: die
+			if (corpse)
+			{
+				// TODO: add corpse
+			}
 		}
 		
 	}

@@ -10,3 +10,4 @@ PARTICIPANTS:
 Gal ------ CODING
 Tim ------ GRAPHICS
 Eli ------ CODING
+Asaf ------ MUSIC, SOUND

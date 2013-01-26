@@ -23,6 +23,8 @@ package
 			super.init();
 			FP.console.enable();
 			FP.world = new GameWorld();
+			Music.init();
+			Music.resume();
 		}
 		
 	}

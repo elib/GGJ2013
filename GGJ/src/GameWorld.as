@@ -3,6 +3,7 @@ package
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.TiledSpritemap;
 	import net.flashpunk.utils.Draw;
 	import net.flashpunk.World;
 	import trees.*;
@@ -21,14 +22,22 @@ package
 		
 		private var heart :Heart;
 		
+		private var allMaps:Array;
+		
 		public function GameWorld() 
 		{
 			super();
 			
+			var numMaps:int = 6;
+			var radiusFactor :Number = 1 / ( 2 * Math.sin(Math.PI / numMaps));
+			
 			//initializaition
-			for (var i :int = 0; i < 6; i++)
+			allMaps = new Array();
+			
+			for (var i :int = 0; i < numMaps; i++)
 			{
-				map = new Map(360 / 6 * i, Levels.LEVELS[i]);
+				map = new Map(360 / numMaps * i, Levels.LEVELS[i], radiusFactor);
+				allMaps.push(map);
 				add(map);
 			}
 			
@@ -39,12 +48,27 @@ package
 			add(heart);
 			
 			//test tree
-			for (var i :int = 0 ; i < 20; i++)
+			for (var q :int = 0 ; q < 50; q++)
 			{
 				var tree :Tree = (add(new (FP.choose([Tree1, Tree2, Tree3]) as Class)) as Tree);
-				tree.x = FP.rand(200) - 100;
-				tree.y = 400;
-				tree.tilemapNum = FP.rand(6);
+				tree.tilemapNum = FP.rand(numMaps);
+				
+				var theMap:Map = allMaps[tree.tilemapNum] as Map;
+				
+				var x:int = FP.rand(theMap.grid.columns);
+				var col:int = x;
+				
+				var found:Boolean = false;
+				var hei:int = -1;
+				
+				while (!found) {
+					hei++;
+					found = theMap.grid.getTile(col, hei);
+				}
+				
+				trace("found at: " + x + ", " + hei);
+				tree.x = x * 32 - theMap.grid.width/2 - tree.width/4;
+				tree.y = hei * 32 - tree.height -theMap.grid.height/4 + theMap.width*radiusFactor;
 			}
 		}
 		

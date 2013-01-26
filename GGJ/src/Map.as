@@ -17,7 +17,7 @@ package
 	{
 		
 		private var tilemap :Tilemap;
-		private var grid :Grid
+		public var grid :Grid
 		
 		[Embed(source="res/TileSet.png")]
 		private static const TilesetGraphic :Class;
@@ -28,7 +28,7 @@ package
 		
 		private var angle :Number;
 		
-		public function Map(angle :Number, level :Class) 
+		public function Map(angle :Number, level :Class, radiusFactor:Number) 
 		{
 			super();
 			loadMap(level);
@@ -36,7 +36,7 @@ package
 			mask = grid = tilemap.createGrid(SOLID_TILES);
 			bitmap = new BitmapData(tilemap.width, tilemap.height);
 			
-			var radius :Number = tilemap.width / ( 2 * Math.sin(Math.PI / 6));
+			var radius:Number = tilemap.width * radiusFactor;
 			
 			angle = angle / 180 * Math.PI + Math.PI / 2;
 			x = Math.sin(angle) * radius;
@@ -49,6 +49,7 @@ package
 			var bytes :ByteArray = new level;
 			var xml :XML = new XML(bytes.readUTFBytes(bytes.length));
 			graphic = tilemap = new Tilemap(TilesetGraphic, (int)(xml.@width) * (int)(xml.@tilewidth), (int)(xml.@height) * (int)(xml.@tileheight), xml.@tilewidth, xml.@tileheight);
+			this.layer = Layers.LAYER_MAP;
 			tilemap.loadFromString(xml.layer.data, ",", ",\n");
 			for (var xx :int = 0; xx < tilemap.columns; xx++) {
 				for (var yy :int = 0; yy < tilemap.rows; yy++) {
